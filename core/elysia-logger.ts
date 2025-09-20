@@ -1,5 +1,5 @@
 import winston from 'winston';
-import { Elysia, type Context } from 'elysia';
+import { Elysia } from 'elysia';
 import { runtime, createLogDir } from '../utils';
 import { consoleFormat, fileFormat } from '../utils/formatters';
 import { getMethodColor, getStatusColor, getArrowForMethod, getResponseTimeColor } from '../utils/colors';
@@ -80,7 +80,7 @@ export function createLogger(config: LoggerConfig = {}) {
       if (autoLogging === false) return;
       const shouldIgnore =
         typeof autoLogging === 'object' &&
-        autoLogging.ignore?.(ctx as unknown as Context);
+        autoLogging.ignore?.(ctx as unknown as ElysiaContext);
       if (shouldIgnore) return;
 
       const responseTime = Math.round(
@@ -128,7 +128,7 @@ export function createLogger(config: LoggerConfig = {}) {
           });
         }
         const additionalProps = customProps
-          ? customProps(ctx as unknown as Context)
+          ? customProps(ctx as unknown as ElysiaContext)
           : {};
         if (additionalProps && Object.keys(additionalProps).length > 0) {
           tsukiLogger.debug('Request context', additionalProps);
@@ -162,7 +162,7 @@ export function createLogger(config: LoggerConfig = {}) {
         const timeColor = getResponseTimeColor(responseTime);
         const logMessage = `${methodColor} ${url} ${statusColor} ${timeColor}`;
         const additionalProps = customProps
-          ? customProps(ctx as unknown as Context)
+          ? customProps(ctx as unknown as ElysiaContext)
           : {};
         tsukiLogger.error(logMessage, {
           type: 'http_error',

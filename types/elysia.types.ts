@@ -1,9 +1,11 @@
-import type { Context } from 'elysia';
-
-export interface ElysiaContext extends Omit<Context, 'set' | 'path'> {
+// Generic context interface to avoid Elysia type conflicts
+export interface ElysiaContext {
   startTime?: number;
   request: Request;
   path: string;
+  params?: Record<string, string>;
+  query?: Record<string, string>;
+  headers: Record<string, string | undefined>;
   set: { 
     status?: number | string;
     headers?: Record<string, string>;
@@ -18,6 +20,9 @@ export interface ElysiaContext extends Omit<Context, 'set' | 'path'> {
     stack?: string;
   };
   code?: string;
+  body?: any;
+  cookie?: Record<string, any>;
+  [key: string]: any;
 }
 
 export interface ResolveCtx {
