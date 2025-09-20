@@ -1,6 +1,8 @@
 # Tsuki Logger 🌙
 
-A clean, modular Winston-based logger for Elysia with Bun-first runtime detection and TypeScript support.
+> *The silent observer for your Elysia applications*
+
+**Tsuki** (月) is a high-performance, runtime-adaptive logger for Elysia applications that combines the flexibility of Winston with the speed of Bun, while gracefully falling back to Node.js when needed.
 
 [![Bun](https://img.shields.io/badge/Bun-1.2+-000000?style=flat&logo=bun)](https://bun.sh)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=flat&logo=typescript)](https://www.typescriptlang.org)
@@ -50,16 +52,16 @@ tsuki/
 
 ```bash
 # Using Bun (recommended)
-bun add tsuki
+bun add tsuki-logger
 
 # Using npm
-npm install tsuki
+npm install tsuki-logger
 
 # Using yarn
-yarn add tsuki
+yarn add tsuki-logger
 
 # Using pnpm
-pnpm add tsuki
+pnpm add tsuki-logger
 ```
 
 ## 📖 Usage
@@ -67,7 +69,7 @@ pnpm add tsuki
 ### Standalone Logger
 
 ```typescript
-import { logger } from 'tsuki';
+import { logger } from 'tsuki-logger';
 
 // Basic logging
 logger.info('Hello world');
@@ -89,7 +91,7 @@ logger.table('User data', {
 
 ```typescript
 import { Elysia } from 'elysia';
-import { createLogger } from 'tsuki';
+import { createLogger } from 'tsuki-logger';
 
 const app = new Elysia()
   .use(createLogger({
@@ -108,7 +110,7 @@ const app = new Elysia()
 ### Advanced Configuration
 
 ```typescript
-import { createLogger } from 'tsuki';
+import { createLogger } from 'tsuki-logger';
 
 const logger = createLogger({
   level: 'info',
@@ -127,7 +129,7 @@ const logger = createLogger({
 ### Runtime Detection
 
 ```typescript
-import { runtime } from 'tsuki/utils';
+import { runtime } from 'tsuki-logger/utils';
 
 console.log(`Running on: ${runtime.type}`); // 'bun' or 'node'
 console.log(`Is Bun: ${runtime.isBun}`);
@@ -366,4 +368,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Made with ❤️ and TypeScript
+*Named after the Japanese word for moon (月), Tsuki silently watches over your applications, logging everything that happens under its watchful gaze.* 🌙✨

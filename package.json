@@ -1,5 +1,5 @@
 {
-  "name": "tsuki",
+  "name": "tsuki-logger",
   "version": "0.0.1",
   "description": "A clean, modular Winston-based logger for Elysia with Bun-first runtime detection and TypeScript support",
   "keywords": ["logger", "winston", "elysia", "bun", "typescript", "logging"],
