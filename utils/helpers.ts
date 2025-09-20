@@ -5,7 +5,10 @@ export function getCallerLocation(): CallerLocation {
   const err = new Error();
   const stack = (err.stack || '').split('\n');
   
-  for (const frame of stack) {
+  for (let i = 3; i < stack.length; i++) {
+    const frame = stack[i];
+    if (!frame) continue;
+    
     const match =
       frame.match(/\((.*):(\d+):(\d+)\)/) ||
       frame.match(/at ([^ ]+):(\d+):(\d+)/);
@@ -17,7 +20,11 @@ export function getCallerLocation(): CallerLocation {
     if (
       filePath.includes('node:internal') ||
       filePath.includes('node_modules/winston') ||
-      filePath.includes('standalone-logger.ts')
+      filePath.includes('node_modules/tsuki-logger') ||
+      filePath.includes('standalone-logger.ts') ||
+      filePath.includes('elysia-logger.ts') ||
+      filePath.includes('dist/index.js') ||
+      filePath.includes('dist/index.mjs')
     ) {
       continue;
     }
@@ -30,7 +37,7 @@ export function getCallerLocation(): CallerLocation {
     return { file: rel, line: Number.isNaN(line) ? null : line };
   }
   
-  return { file: 'src/utils/configs/loggers/standalone-logger.ts', line: null };
+  return { file: 'unknown', line: null };
 }
 
 export function resolveStatusCode(
