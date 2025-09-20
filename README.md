@@ -233,6 +233,15 @@ bun run test:all
 bun test tests/comprehensive.test.ts
 ```
 
+### Preview
+#### Integrated logger preview
+![Preview of Tsuki Logger output](./assets/api-preview.png)
+
+
+#### Test mode preview with standalone logger 
+![Preview of Tsuki Logger output](./assets/preview.png)
+
+
 ### Test Coverage
 
 The test suite covers:
