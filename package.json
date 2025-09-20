@@ -1,0 +1,39 @@
+{
+  "name": "tsuki",
+  "version": "0.0.1",
+  "description": "A clean, modular Winston-based logger for Elysia with Bun-first runtime detection and TypeScript support",
+  "keywords": ["logger", "winston", "elysia", "bun", "typescript", "logging"],
+  "author": "Mohammed Ibrahim",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mohammedibrahim8887/tsuki.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mohammedibrahim8887/tsuki/issues"
+  },
+  "homepage": "https://github.com/mohammedibrahim8887/tsuki#readme",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "bun test tests/comprehensive.test.ts",
+    "test:watch": "bun test tests/comprehensive.test.ts --watch",
+    "test:all": "bun test tests/",
+    "build": "bun build index.ts --outdir dist --target bun",
+    "type-check": "bun run tsc --noEmit",
+    "dev": "bun run test:watch",
+    "lint": "bun run type-check",
+    "clean": "rm -rf dist .log"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "elysia": "^1.4.6",
+    "winston": "^3.17.0"
+  }
+}
