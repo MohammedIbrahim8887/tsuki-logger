@@ -13,13 +13,26 @@
     "url": "https://github.com/mohammedibrahim8887/tsuki/issues"
   },
   "homepage": "https://github.com/mohammedibrahim8887/tsuki#readme",
-  "module": "index.ts",
-  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "test": "bun test tests/comprehensive.test.ts",
     "test:watch": "bun test tests/comprehensive.test.ts --watch",
     "test:all": "bun test tests/",
-    "build": "bun build index.ts --outdir dist --target bun",
+    "build": "tsup",
+    "prepublishOnly": "bun run build",
     "type-check": "bun run tsc --noEmit",
     "dev": "bun run test:watch",
     "lint": "bun run type-check",
@@ -34,6 +47,7 @@
   "dependencies": {
     "chalk": "^5.6.2",
     "elysia": "^1.4.6",
+    "tsup": "^8.5.0",
     "winston": "^3.17.0"
   }
 }

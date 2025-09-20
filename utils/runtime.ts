@@ -1,4 +1,6 @@
 import type { RuntimeAdapter, RuntimeType } from '../types';
+import fs from 'fs';
+import path from 'path';
 
 class RuntimeDetector {
   private static instance: RuntimeDetector;
@@ -52,7 +54,6 @@ class BunAdapter implements RuntimeAdapter {
     },
     mkdirSync: (path: string, options?: { recursive?: boolean }): void => {
       try {
-        const fs = require('fs');
         fs.mkdirSync(path, options);
       } catch {
         // Fallback handled by Node.js fs
@@ -65,7 +66,6 @@ class BunAdapter implements RuntimeAdapter {
 
   path = {
     join: (...paths: string[]): string => {
-      const path = require('path');
       return path.join(...paths);
     }
   };
@@ -84,21 +84,18 @@ class NodeAdapter implements RuntimeAdapter {
   readonly isBun = false;
   readonly isNode = true;
 
-  private fs = require('fs');
-  private pathModule = require('path');
-
   file = {
-    existsSync: (path: string): boolean => this.fs.existsSync(path),
+    existsSync: (path: string): boolean => fs.existsSync(path),
     mkdirSync: (path: string, options?: { recursive?: boolean }): void => {
-      this.fs.mkdirSync(path, options);
+      fs.mkdirSync(path, options);
     },
     writeFileSync: (path: string, data: string): void => {
-      this.fs.writeFileSync(path, data);
+      fs.writeFileSync(path, data);
     }
   };
 
   path = {
-    join: (...paths: string[]): string => this.pathModule.join(...paths)
+    join: (...paths: string[]): string => path.join(...paths)
   };
 
   env = {
