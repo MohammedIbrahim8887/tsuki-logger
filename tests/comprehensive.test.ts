@@ -1,6 +1,7 @@
 import { describe, it, expect } from "bun:test";
-import { logger, createLogger, runtime } from "../index";
+import { logger, runtime } from "../index";
 import { getMethodColor, getStatusColor, getColoredLevel } from "../utils/colors";
+import { createLogger } from "../core/elysia-logger";
 
 describe("Tsuki Logger - Comprehensive Test Suite", () => {
   describe("🚀 Runtime Detection", () => {
@@ -14,7 +15,7 @@ describe("Tsuki Logger - Comprehensive Test Suite", () => {
 
     it("should have working path operations", () => {
       const result = runtime.path.join("a", "b", "c");
-      expect(result).toBe("a/b/c");
+      expect(result).toBe(process.platform === 'win32' ? "a\\b\\c" : "a/b/c");
       console.log(`✅ Path operations work: ${result}`);
     });
 

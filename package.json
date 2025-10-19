@@ -1,8 +1,8 @@
 {
   "name": "tsuki-logger",
-  "version": "0.0.3",
-  "description": "A clean, modular Winston-based logger for Elysia with Bun-first runtime detection and TypeScript support",
-  "keywords": ["logger", "winston", "elysia", "bun", "typescript", "logging"],
+  "version": "0.0.31",
+  "description": "A clean, modular Winston-based standalone logger with Bun-first runtime detection and TypeScript support. Includes optional Elysia integration.",
+  "keywords": ["logger", "winston", "elysia", "standalone", "bun", "typescript", "logging"],
   "author": "Mohammed Ibrahim",
   "license": "MIT",
   "repository": {
@@ -21,6 +21,16 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
+    },
+    "./standalone": {
+      "types": "./dist/standalone.d.ts",
+      "import": "./dist/standalone.mjs",
+      "require": "./dist/standalone.js"
+    },
+    "./elysia": {
+      "types": "./dist/elysia.d.ts",
+      "import": "./dist/elysia.mjs",
+      "require": "./dist/elysia.js"
     }
   },
   "files": [
@@ -42,8 +52,12 @@
     "@types/bun": "latest"
   },
   "peerDependencies": {
-    "typescript": "^5",
-    "elysia": "latest"
+    "typescript": "^5"
+  },
+  "peerDependenciesMeta": {
+    "elysia": {
+      "optional": true
+    }
   },
   "dependencies": {
     "chalk": "^5.6.2",

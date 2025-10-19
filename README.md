@@ -1,8 +1,8 @@
 # Tsuki Logger 🌙
 
-> *The silent observer for your Elysia applications*
+> *The silent observer for your applications*
 
-**Tsuki** (月) is a high-performance, runtime-adaptive logger for Elysia applications that combines the flexibility of Winston with the speed of Bun, while gracefully falling back to Node.js when needed.
+**Tsuki** (月) is a high-performance, runtime-adaptive standalone logger that combines the flexibility of Winston with the speed of Bun, while gracefully falling back to Node.js when needed. It includes optional Elysia integration for web applications.
 
 [![Bun](https://img.shields.io/badge/Bun-1.2+-000000?style=flat&logo=bun)](https://bun.sh)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=flat&logo=typescript)](https://www.typescriptlang.org)
@@ -14,7 +14,7 @@
 - **🚀 Runtime Detection**: Automatically detects and optimizes for Bun vs Node.js
 - **🏗️ Modular Architecture**: Clean separation of concerns with dedicated utilities
 - **🔒 TypeScript Support**: Full type safety throughout
-- **🌐 Elysia Integration**: Seamless Elysia plugin with HTTP request logging
+- **🌐 Elysia Integration**: Optional Elysia plugin with HTTP request logging
 - **📝 Standalone Usage**: Can be used independently without Elysia
 - **🎨 Custom Log Levels**: success, critical, table, and standard levels
 - **🌈 Color Support**: Beautiful console output with chalk colors
@@ -66,7 +66,7 @@ pnpm add tsuki-logger
 
 ## 📖 Usage
 
-### Standalone Logger
+### Basic Logger Usage
 
 ```typescript
 import { logger } from 'tsuki-logger';
@@ -85,13 +85,19 @@ logger.table('User data', {
   age: 30, 
   city: 'New York' 
 });
+
+// Logging with metadata
+logger.info('User login', { 
+  userId: 123, 
+  timestamp: new Date().toISOString() 
+});
 ```
 
-### Elysia Integration
+### Elysia Integration (Optional)
 
 ```typescript
 import { Elysia } from 'elysia';
-import { createLogger } from 'tsuki-logger';
+import { createLogger } from 'tsuki-logger/elysia';
 
 const app = new Elysia()
   .use(createLogger({
@@ -110,7 +116,7 @@ const app = new Elysia()
 ### Advanced Configuration
 
 ```typescript
-import { createLogger } from 'tsuki-logger';
+import { createLogger } from 'tsuki-logger/elysia';
 
 const logger = createLogger({
   level: 'info',

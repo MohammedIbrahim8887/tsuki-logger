@@ -1,8 +1,8 @@
 import winston from 'winston';
-import { runtime, createLogDir } from '../utils';
-import { consoleFormat, fileFormat } from '../utils/formatters';
-import { getCallerLocation } from '../utils/helpers';
-import type { StandaloneLogger, LogLevels } from '../types';
+import { runtime, createLogDir } from '../utils/standalone-runtime';
+import { consoleFormat, fileFormat } from '../utils/standalone-formatters';
+import { getCallerLocation } from '../utils/standalone-helpers';
+import type { StandaloneLogger, LogLevels } from '../types/standalone.types';
 
 const logDir = createLogDir(runtime);
 

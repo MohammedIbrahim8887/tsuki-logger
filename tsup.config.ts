@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup'
 
 export default defineConfig({
-  entry: ['index.ts'],
+  entry: ['index.ts', 'standalone.ts', 'elysia.ts'],
   format: ['cjs', 'esm'],
   dts: true,
   splitting: false,
